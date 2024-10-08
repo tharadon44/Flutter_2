@@ -6,11 +6,8 @@ import 'package:testlab/providers/usar_providers.dart';
 import 'package:testlab/register_page.dart';
 import 'controllers/auth_service.dart';
 
-
-
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key})
-      : super(key: key); // เพิ่ม Key? ให้รองรับ null-safety
+  const LoginPage({Key? key}) : super(key: key); 
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -24,17 +21,14 @@ class _LoginPageState extends State<LoginPage> {
   void _login(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
       try {
-        // เรียกใช้ AuthService เพื่อทำการล็อกอิน
         final userModel = await AuthService().login(
           _usernameController.text,
           _passwordController.text,
         );
 
         if (userModel != null) {
-          // ใช้งาน UserProvider เพื่อจัดเก็บข้อมูลการล็อกอิน
           context.read<UserProvider>().onLogin(userModel);
 
-          // ตรวจสอบ role ของผู้ใช้และเปลี่ยนหน้า
           if (userModel.user?.role == "Admin") {
             Navigator.pushReplacement(
               context,
@@ -52,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
           }
         }
       } catch (e) {
-        print(e); // พิมพ์ข้อผิดพลาด
+        print(e);
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Login failed")),
         );
@@ -67,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
           child: Form(
-            key: _formKey, // ตรวจสอบให้แน่ใจว่า _formKey ถูกประกาศ
+            key: _formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -76,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
-                    color: Colors.cyan,
+                    color: Colors.orange, // เปลี่ยนสีเป็นส้ม
                     shadows: [
                       Shadow(
                         blurRadius: 10.0,
@@ -86,13 +80,8 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 20),
-                const Icon(
-                  Icons.sailing,
-                  color: Colors.cyan,
-                  size: 120,
-                ),
                 const SizedBox(height: 40),
+                // เอาไอคอนออกจากที่นี่
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.9),
@@ -116,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                           labelText: 'Username',
                           prefixIcon: const Icon(
                             Icons.person,
-                            color: Colors.cyan,
+                            color: Colors.orange, // เปลี่ยนสีเป็นส้ม
                           ),
                           filled: true,
                           fillColor: Colors.white70,
@@ -133,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                           labelText: 'Password',
                           prefixIcon: const Icon(
                             Icons.lock,
-                            color: Colors.cyan,
+                            color: Colors.orange, // เปลี่ยนสีเป็นส้ม
                           ),
                           filled: true,
                           fillColor: Colors.white70,
@@ -145,13 +134,13 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    _login(context); // ตรวจสอบให้แน่ใจว่า _login ถูกประกาศ
+                    _login(context);
                   },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    backgroundColor: Colors.cyan,
+                    backgroundColor: Colors.orange, // เปลี่ยนสีเป็นส้ม
                   ),
                   child: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
@@ -173,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                     'Create an account',
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.cyan,
+                      color: Colors.orange, // เปลี่ยนสีเป็นส้ม
                       decoration: TextDecoration.underline,
                     ),
                   ),
